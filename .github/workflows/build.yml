@@ -31,19 +31,16 @@ jobs:
           npm install --legacy-peer-deps
           npm install @capacitor/core @capacitor/cli @capacitor/android
 
-      - name: Create Dummy Public Directory if Needed
+      - name: Build Web Assets (Create www)
         run: |
-          mkdir -p public
-          cp index.html public/ 2>/dev/null || true
-          cp -r *.js *.css public/ 2>/dev/null || true
+          npm run build
 
-      - name: Add and Sync Capacitor Android
+      - name: Add and Sync Android Platform
         run: |
           if [ ! -d "android" ]; then
             npx cap add android
           fi
           mkdir -p android/app/src/main/assets
-          npx cap copy android
           npx cap sync android
 
       - name: Build Android APK
