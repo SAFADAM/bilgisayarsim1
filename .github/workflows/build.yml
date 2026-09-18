@@ -28,26 +28,24 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          npm install --legacy-peer-deps
-          npm install @capacitor/core @capacitor/cli @capacitor/android
+          npm install
 
-      - name: Build Web Assets (Create www)
+      - name: Build Web Assets
         run: |
           npm run build
 
-      - name: Add and Sync Android Platform
+      - name: Add & Sync Capacitor Android
         run: |
           if [ ! -d "android" ]; then
             npx cap add android
           fi
-          mkdir -p android/app/src/main/assets
           npx cap sync android
 
       - name: Build Android APK
         run: |
           cd android
           chmod +x gradlew
-          ./gradlew assembleDebug --stacktrace
+          ./gradlew assembleDebug --no-daemon
 
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
