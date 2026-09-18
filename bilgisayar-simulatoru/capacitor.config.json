@@ -1,0 +1,9 @@
+{
+  "appId": "com.minidows.os",
+  "appName": "Minidows",
+  "webDir": ".",
+  "bundledWebRuntime": false,
+  "server": {
+    "androidScheme": "https"
+  }
+}

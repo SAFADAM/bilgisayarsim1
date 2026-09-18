@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#0d1117">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>SimPC / CyberOS - Sanal Bilgisayar Simülatörü</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Masaüstü Alanı -->
+    <div id="desktop" class="wp-cyberpunk">
+        <!-- Masaüstü Uygulama Simgeleri -->
+        <div class="desktop-icons">
+            <div class="desktop-icon" id="icon-shop" onclick="window.Apps.openShop()">
+                <div class="icon-img">🛒</div>
+                <div class="icon-label">Parça Mağazası</div>
+            </div>
+
+            <div class="desktop-icon" id="icon-miner" onclick="window.Apps.openMiner()">
+                <div class="icon-img">⚡</div>
+                <div class="icon-label">Kripto Madenci</div>
+            </div>
+
+            <div class="desktop-icon" id="icon-terminal" onclick="window.Apps.openTerminal()">
+                <div class="icon-img">💻</div>
+                <div class="icon-label">Hacker CMD</div>
+            </div>
+
+            <div class="desktop-icon" id="icon-browser" onclick="window.Apps.openBrowser()">
+                <div class="icon-img">🌐</div>
+                <div class="icon-label">İnternet</div>
+            </div>
+
+            <div class="desktop-icon" id="icon-games" onclick="window.Apps.openGames()">
+                <div class="icon-img">🎮</div>
+                <div class="icon-label">Oyun Merkezi</div>
+            </div>
+
+            <div class="desktop-icon" id="icon-files" onclick="window.Apps.openFiles()">
+                <div class="icon-img">📁</div>
+                <div class="icon-label">Dosyalar</div>
+            </div>
+
+            <div class="desktop-icon" id="icon-notepad" onclick="window.Apps.openNotepad()">
+                <div class="icon-img">📝</div>
+                <div class="icon-label">Not Defteri</div>
+            </div>
+
+            <div class="desktop-icon" id="icon-settings" onclick="window.Apps.openSettings()">
+                <div class="icon-img">⚙️</div>
+                <div class="icon-label">Ayarlar</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Başlat Menüsü -->
+    <div id="start-menu">
+        <div class="start-header">
+            <div class="user-avatar">👨‍💻</div>
+            <div class="user-info">
+                <div class="user-name">SimPC Kullanıcısı</div>
+                <div class="user-balance">Bakiye: <span id="user-balance-val">$150.00</span></div>
+            </div>
+        </div>
+
+        <div class="start-apps-grid">
+            <div class="start-app-item" onclick="window.Apps.openBrowser(); document.getElementById('start-menu').style.display='none';">
+                <span class="app-icon">🌐</span>
+                <span class="app-name">İnternet</span>
+            </div>
+            <div class="start-app-item" onclick="window.Apps.openShop(); document.getElementById('start-menu').style.display='none';">
+                <span class="app-icon">🛒</span>
+                <span class="app-name">Mağaza</span>
+            </div>
+            <div class="start-app-item" onclick="window.Apps.openMiner(); document.getElementById('start-menu').style.display='none';">
+                <span class="app-icon">⚡</span>
+                <span class="app-name">Madenci</span>
+            </div>
+            <div class="start-app-item" onclick="window.Apps.openTerminal(); document.getElementById('start-menu').style.display='none';">
+                <span class="app-icon">💻</span>
+                <span class="app-name">Terminal</span>
+            </div>
+            <div class="start-app-item" onclick="window.Apps.openGames(); document.getElementById('start-menu').style.display='none';">
+                <span class="app-icon">🎮</span>
+                <span class="app-name">Oyunlar</span>
+            </div>
+            <div class="start-app-item" onclick="window.Apps.openFiles(); document.getElementById('start-menu').style.display='none';">
+                <span class="app-icon">📁</span>
+                <span class="app-name">Dosyalar</span>
+            </div>
+            <div class="start-app-item" onclick="window.Apps.openSettings(); document.getElementById('start-menu').style.display='none';">
+                <span class="app-icon">⚙️</span>
+                <span class="app-name">Ayarlar</span>
+            </div>
+        </div>
+
+        <div class="start-footer">
+            <button class="power-btn" onclick="window.System.shutdown(); document.getElementById('start-menu').style.display='none';" style="background: rgba(239, 68, 68, 0.2); color: #f85149; border-color: rgba(239, 68, 68, 0.4);">
+                ⏻ Kapat
+            </button>
+            <button class="power-btn" onclick="window.System.restart(); document.getElementById('start-menu').style.display='none';" style="background: rgba(56, 139, 253, 0.2); color: #58a6ff; border-color: rgba(56, 139, 253, 0.4);">
+                🔄 Yeniden Başlat
+            </button>
+        </div>
+    </div>
+
+    <!-- Alt Görev Çubuğu (Taskbar) -->
+    <div id="taskbar">
+        <div class="taskbar-left">
+            <button class="start-button" id="start-btn">
+                <span class="start-icon">🪟</span>
+                <span class="start-text">Başlat</span>
+            </button>
+        </div>
+
+        <div class="taskbar-center" id="taskbar-center">
+            <!-- Açık pencereler buraya dinamik eklenir -->
+        </div>
+
+        <div class="taskbar-right">
+            <!-- Sanal Dokunmatik Fare / Trackpad Butonu -->
+            <div class="tray-item" id="tray-trackpad" title="Telefonda Sanal Fare Aç/Kapat">🖱️</div>
+            <!-- Tam Ekran Butonu -->
+            <div class="tray-item" id="tray-fs" title="Tam Ekran">⛶</div>
+            <!-- Ses Aç/Kapat -->
+            <div class="tray-item" id="tray-sound" title="Ses">🔊</div>
+            <!-- Pil Durumu -->
+            <div class="tray-item" id="tray-battery" title="Pil">⚡ 100%</div>
+            <!-- Saat & Tarih -->
+            <div class="tray-clock">
+                <span id="tray-time">12:00</span>
+                <span id="tray-date" style="font-size: 9px; opacity: 0.8;">01.01.2026</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sanal Trackpad (Mobil Dokunmatik Kontrol İçin) -->
+    <div id="virtual-trackpad">
+        <div class="tp-pad" id="tp-pad-area">Burada Parmak Kaydır</div>
+        <div class="tp-buttons">
+            <button class="tp-btn" id="tp-left-btn">Sol Tık</button>
+            <button class="tp-btn" id="tp-right-btn">Sağ Tık</button>
+        </div>
+    </div>
+
+    <!-- Sanal Fare İmleci -->
+    <div id="virtual-cursor"></div>
+
+    <!-- Toast Bildirim Konteyneri -->
+    <div id="toast-container"></div>
+
+    <!-- Mavi Ekran (BSOD - Blue Screen of Death) -->
+    <div id="bsod-screen">
+        <div class="bsod-face">:(</div>
+        <div class="bsod-text">
+            Bilgisayarınız bir sorunla karşılaştı ve yeniden başlatılması gerekiyor.
+            Şu anda bazı hata bilgileri toplanıyor, bu işlemden sonra otomatik yeniden başlatılacak.
+        </div>
+        <div class="bsod-progress" id="bsod-prog-val">0% tamamlandı</div>
+        <div class="bsod-qr-row">
+            <div class="bsod-qr">QR CODE</div>
+            <div class="bsod-code">
+                Durdurma Kodu: <span id="bsod-error-code">CRITICAL_PROCESS_DIED</span><br>
+                Başarısız Olan: simpc_core.sys
+            </div>
+        </div>
+    </div>
+
+    <!-- Kapanma Ekranı (Power Off) -->
+    <div id="power-off-screen">
+        <div class="physical-power-btn" onclick="window.System.bootUp()" title="Bilgisayarı Aç">⏻</div>
+        <div style="font-size: 14px; color: #8b949e; line-height: 1.5;">
+            Bilgisayar Kapandı.<br>
+            <span style="font-size: 12px; color: #58a6ff;">Tekrar açmak için yukarıdaki güç tuşuna dokunun.</span>
+        </div>
+    </div>
+
+    <!-- BIOS / Yeniden Başlatma Ekranı -->
+    <div id="bios-screen">
+        <div id="bios-log">SimBIOS v2.4 Başlatılıyor...</div>
+    </div>
+
+    <!-- Script Yüklemeleri -->
+    <script src="audio.js"></script>
+    <script src="system.js"></script>
+    <script src="apps.js"></script>
+
+    <script>
+        // Sayfa yüklendiğinde sistemi başlat
+        window.addEventListener('DOMContentLoaded', () => {
+            window.System.init();
+
+            // İlk kullanıcı etkileşiminde açılış sesini çal
+            const startAudioOnFirstTouch = () => {
+                window.Sound.playStartup();
+                document.removeEventListener('pointerdown', startAudioOnFirstTouch);
+            };
+            document.addEventListener('pointerdown', startAudioOnFirstTouch, { once: true });
+
+            // Ses tepsisi butonu
+            const soundTray = document.getElementById('tray-sound');
+            if (soundTray) {
+                soundTray.addEventListener('click', () => {
+                    const enabled = window.Sound.toggleMute();
+                    soundTray.textContent = enabled ? '🔊' : '🔇';
+                });
+            }
+        });
+    </script>
+</body>
+</html>
