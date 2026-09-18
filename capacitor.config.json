@@ -1,5 +1,5 @@
 {
   "appId": "com.bilgisayarsimulatoru.app",
   "appName": "Bilgisayar Simulatoru",
-  "webDir": "."
+  "webDir": "www"
 }
