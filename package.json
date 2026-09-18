@@ -1,19 +1,12 @@
 {
-  "name": "minidows-os",
+  "name": "bilgisayar-simulatoru",
   "version": "1.0.0",
-  "description": "Telefondan oynanabilen 100+ sistemli Minidows bilgisayar simülatörü",
-  "main": "index.html",
+  "description": "",
+  "main": "apps.js",
   "scripts": {
-    "build": "echo 'Web assets ready in root'",
-    "cap:sync": "npx cap sync",
-    "cap:open": "npx cap open android"
+    "build": "mkdir -p www && cp -r index.html *.js *.css assets www/ 2>/dev/null || cp -r index.html *.js *.css www/"
   },
-  "dependencies": {
-    "@capacitor/android": "^6.0.0",
-    "@capacitor/app": "^6.0.0",
-    "@capacitor/core": "^6.0.0"
-  },
-  "devDependencies": {
-    "@capacitor/cli": "^6.0.0"
-  }
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
