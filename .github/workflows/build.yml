@@ -12,45 +12,47 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Proje kodlarını GitHub Actions ortamına çek
+      # 1. Proje kodlarını çek
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2. Node.js ortamını kur
+      # 2. Node.js 20 ortamını kur
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      # 3. Java JDK 17 ortamını kur (Android Gradle için gerekli)
+      # 3. Java JDK 17 ortamını kur
       - name: Setup Java JDK
         uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
           java-version: '17'
 
-      # 4. Proje bağımlılıklarını kur
-      - name: Install Dependencies
+      # 4. Bağımlılıkları ve Capacitor Android modüllerini yükle
+      - name: Install Dependencies & Capacitor
         run: |
-          npm install
-
-      # 5. Capacitor ve Android platformunu yükle/güncelle
-      - name: Add and Sync Capacitor Android
-        run: |
+          npm install --legacy-peer-deps
           npm install @capacitor/core @capacitor/cli @capacitor/android
+
+      # 5. Android Platformunu Ekle, Klasörleri Hazırla ve Senkronize Et
+      - name: Setup Android Project
+        run: |
           if [ ! -d "android" ]; then
             npx cap add android
           fi
+          mkdir -p android/app/src/main/assets
+          npx cap copy android
           npx cap sync android
 
-      # 6. gradlew dosyasına çalıştırma izni ver ve APK'yı derle
+      # 6. Gradle ile APK Derle
       - name: Build Android APK
         run: |
           cd android
           chmod +x gradlew
           ./gradlew assembleDebug --stacktrace
 
-      # 7. Oluşturulan APK dosyasını Artifacts olarak yükle
+      # 7. Oluşan APK'yı GitHub Artifacts Yap
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
         with:
