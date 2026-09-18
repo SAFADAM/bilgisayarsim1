@@ -1,9 +1,5 @@
 {
   "appId": "com.bilgisayarsimulatoru.app",
-  "appName": ¨Bilgisayar Simulatoru",
-  "webDir": ".",
-  "bundledWebRuntime": false,
-  "server": {
-    "androidScheme": "https"
-  }
+  "appName": "Bilgisayar Simulatoru",
+  "webDir": "."
 }
