@@ -1,6 +1,6 @@
 {
-  "appId": "com.minidows.os",
-  "appName": "Minidows",
+  "appId": "com.bilgisayarsimulatoru.app",
+  "appName": ¨Bilgisayar Simulatoru",
   "webDir": ".",
   "bundledWebRuntime": false,
   "server": {
